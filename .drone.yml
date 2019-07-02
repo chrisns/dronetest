@@ -5,8 +5,23 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-    username: chrisns
-    password: haha-no
-    repo: foo/bar
+    repo: chrisns/test
     tags: latest
- 
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+---
+kind: secret
+name: docker_username
+get:
+  path: dockerhub
+  name: username
+
+---
+kind: secret
+name: docker_password
+get:
+  path: dockerhub
+  name: password
